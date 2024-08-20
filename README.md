@@ -1,10 +1,10 @@
 # Prime Flix
 
-Bem-vindo ao repositório do Prime Flix! Este projeto é um site de streaming de filmes e séries construído em React, com um backend em Node.js e utilizando a API externa do The Movie Database (TMDb) para fornecer informações detalhadas sobre filmes e séries.
+Bem-vindo ao repositório do Prime Flix! Este projeto é um site de informações de filmes construído em React, com um backend em Node.js e utilizando a API externa do The Movie Database (TMDb) para fornecer informações detalhadas sobre filmes.
 
 ## Visão Geral
 
-O Prime Flix é uma plataforma moderna e responsiva que oferece uma experiência de usuário agradável e intuitiva para explorar filmes e séries. Com uma interface amigável e funcionalidades bem projetadas, o objetivo é permitir que os usuários encontrem facilmente informações sobre seus filmes e séries favoritos.
+O Prime Flix é uma plataforma moderna e responsiva que oferece uma experiência de usuário agradável e intuitiva para explorar filmes, possui uma interface amigável e funcionalidades bem projetadas, o objetivo é permitir que os usuários encontrem facilmente informações sobre seus filmes e séries favoritos.
 
 ![Filmes](https://github.com/user-attachments/assets/90d81363-307b-45b8-8b71-db2568beb17c)
 
@@ -12,18 +12,10 @@ Acessar o site: [Prime Flix](https://prime-flix-psi.vercel.app)
 
 ## Funcionalidades Principais
 
-- **Página Inicial**: Uma introdução à academia com imagens atraentes e chamadas para ação claras para explorar os serviços.
-- **Serviços**: Uma lista dos serviços oferecidos pela academia, com descrições detalhadas de cada um.
-- **Ofertas**: Uma listagem dos planos disponíveis para se cadastrar na academia.
-- **Sobre**: Uma seção que fornece informações detalhadas sobre a academia, sua missão, história e equipe.
-- **Contato**: Formulário de contato para facilitar a comunicação entre a academia e os visitantes interessados.
-- **Responsividade**: O site é totalmente responsivo, garantindo uma experiência consistente em dispositivos móveis, tablets e desktops.
-
-## Funcionalidades Principais
-
-- **Busca de Filmes e Séries:** Encontre informações detalhadas sobre seus filmes e séries favoritos.
-- **Interface Intuitiva:** Navegue facilmente por uma interface amigável e responsiva.
-- **Detalhes do Filme/Série:** Veja detalhes como sinopse, elenco e avaliações.
+- **Página Inicial:** Exibe todos os filmes disponíveis, com uma barra de pesquisa que permite buscar filmes por gênero ou categoria, além de uma busca livre para encontrar qualquer filme específico.
+- **Página de Filmes:** Mostra os detalhes de um filme selecionado, incluindo sinopse, nome e informações adicionais. Também é possível salvar o filme na lista de favoritos.
+- **Página de Favoritos:** Funciona como um CRUD (Create, Read, Update, Delete), permitindo aos usuários visualizar detalhes dos filmes salvos, excluir filmes da lista de favoritos, e gerenciar a lista de forma prática e eficiente.
+- **Responsividade:** O site é totalmente responsivo, garantindo uma experiência consistente em dispositivos móveis, tablets e desktops.
 
 ## Tecnologias Utilizadas
 
