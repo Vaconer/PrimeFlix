@@ -8,7 +8,7 @@ O Prime Flix é uma plataforma moderna e responsiva que oferece uma experiência
 
 ![Filmes](https://github.com/user-attachments/assets/90d81363-307b-45b8-8b71-db2568beb17c)
 
-[Prime Flix](https://prime-flix-psi.vercel.app)
+Acessar o site: [Prime Flix](https://prime-flix-psi.vercel.app)
 
 ## Funcionalidades Principais
 
