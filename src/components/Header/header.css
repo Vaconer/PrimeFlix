@@ -199,7 +199,13 @@ header {
     }
 
     .search-bar {
-        display: none;
+        display: flex; /* Alterado de none para flex */
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .search-bar input {
+        width: 100%; /* Fazer a barra de pesquisa ocupar toda a largura disponível */
     }
 
     .menu-toggle {
@@ -208,6 +214,8 @@ header {
 
     .nav-menu {
         display: none;
+        flex-direction: column;
+        width: 100%; /* O menu ocupa a largura total */
     }
 
     .nav-menu.active {
@@ -217,6 +225,6 @@ header {
 
 @media (max-width: 480px) {
     .search-bar input {
-        width: 100px; /* Ajusta a largura da barra de pesquisa em telas muito pequenas */
+        width: 100%; /* Ajusta a largura da barra de pesquisa em telas muito pequenas */
     }
 }
