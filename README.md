@@ -6,7 +6,7 @@ Bem-vindo ao repositório do Prime Flix! Este projeto é um site de streaming de
 
 O Prime Flix é uma plataforma moderna e responsiva que oferece uma experiência de usuário agradável e intuitiva para explorar filmes e séries. Com uma interface amigável e funcionalidades bem projetadas, o objetivo é permitir que os usuários encontrem facilmente informações sobre seus filmes e séries favoritos.
 
-![Prime Flix Screenshot](https://prime-flix-psi.vercel.app/screenshot.png) <!-- Substitua este link pela imagem real do seu projeto -->
+![Filmes](https://github.com/user-attachments/assets/90d81363-307b-45b8-8b71-db2568beb17c)
 
 [Prime Flix](https://prime-flix-psi.vercel.app)
 
