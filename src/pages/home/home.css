@@ -9,6 +9,7 @@
 .featured-movie {
     position: relative;
     height: 100%; /* Ajuste conforme necessário */
+    overflow: hidden;
 }
 
 .featured-movie img {
