@@ -1,0 +1,222 @@
+/* Estilo geral do header */
+header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1));
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); 
+}
+
+/* Menu principal */
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Estilo da logo */
+.logo {
+    text-decoration: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: rgb(227, 227, 227);
+    font-weight: bold;
+    margin-right: 20px; 
+}
+
+/* Estilo dos links do menu */
+.links {
+    text-decoration: none;
+    font-size: 15px;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: rgb(235, 235, 235);
+}
+
+/* Estilo do botão de favoritos */
+.favoritos {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid rgb(197, 197, 197);
+    padding: 10px 10px;
+    color: rgb(227, 227, 227);
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Estilo do hover no botão de favoritos */
+.favoritos:hover {
+    background-color: rgb(234, 234, 234);
+    color: rgb(58, 58, 58);
+}
+
+/* Estilo do campo de pesquisa */
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo do input de pesquisa */
+.search-bar input {
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 400px;
+    margin-left: 50px;
+    font-size: 16px; 
+    color: #fff; 
+    background-color: transparent;
+}
+
+/* Estilo do placeholder do input de pesquisa */
+.search-bar input::placeholder {
+    color: #d6d6d6; 
+    font-style: italic; 
+}
+
+/* Cor do placeholder quando o campo está focado */
+.search-bar input:focus::placeholder {
+    color: #d8d8d8; 
+}
+
+/* Estilo do ícone de pesquisa */
+.search-bar i {
+    margin-left: -30px; 
+    color: #c0c0c0; 
+    cursor: pointer;
+}
+
+/* Estilo do botão de menu hamburguer (inicialmente oculto) */
+.menu-toggle {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: rgb(227, 227, 227);
+    position: absolute; /* Fixar o botão */
+    top: 0; /* Colar no topo */
+    right: 20px; /* Ajustar a distância do lado direito */
+    padding: 15px; /* Adicionar padding para melhor clique */
+    z-index: 1100; /* Garantir que o botão esteja acima de outros elementos */
+}
+
+/* Estilo do menu de navegação (oculto em telas pequenas) */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    position: relative;
+}
+
+/* Menu hamburguer ativo */
+.nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 10px;
+    gap: 10px;
+}
+
+/* Estilo do submenu de categorias */
+.categories-dropdown, .genres-dropdown {
+    display: none;
+    position: absolute;
+    background-color: rgba(24, 24, 24, 0.848);
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.499);
+    z-index: 1001;
+}
+
+/* Estilo específico para o submenu de gêneros */
+.genres-dropdown {
+    max-height: 300px; /* Ajuste a altura máxima conforme necessário */
+    overflow-y: auto;  /* Adiciona a barra de rolagem se o conteúdo exceder a altura */
+}
+
+/* Exibir submenu de categorias e gêneros ao passar o mouse sobre o item de categoria e gêneros */
+.menu .categories:hover .categories-dropdown,
+.menu .genres:hover .genres-dropdown {
+    display: block;
+}
+
+/* Estilo dos itens do submenu */
+.categories-dropdown a,
+.genres-dropdown a {
+    text-decoration: none;
+    color: rgb(235, 235, 235);
+    font-size: 15px;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo ao passar o mouse sobre os itens do submenu */
+.categories-dropdown a:hover,
+.genres-dropdown a:hover {
+    background-color: rgba(255, 255, 255, 0.063);
+}
+
+
+
+/* Adapte o menu para diferentes resoluções */
+@media (max-width: 1187px) {
+    .search-bar input {
+        width: 100px;
+    }
+
+    .search-bar i {
+        display: none;
+    }
+}
+
+@media (max-width: 960px) {
+    .nav-menu {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        margin-top: 30px;
+    }
+
+    .search-bar {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-bar input {
+        width: 100px; /* Ajusta a largura da barra de pesquisa em telas muito pequenas */
+    }
+}

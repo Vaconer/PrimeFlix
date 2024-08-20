@@ -1,0 +1,134 @@
+/* Estilo específico para o contêiner de filmes */
+.meus-filmes {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #141414;
+    padding: 20px;
+    overflow-y: auto; /* Adiciona rolagem vertical específica para este contêiner */
+}
+
+.meus-filmes h1 {
+    margin-bottom: 24px;
+    margin-top: 60px;
+    color: #fefefe;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.meus-filmes span {
+    font-size: 18px;
+    color: #e5e5e5;
+}
+
+.meus-filmes ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.meus-filmes ul li {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.meus-filmes ul li:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.meus-filmes ul li img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px 8px 0 0;
+}
+
+.meus-filmes ul li span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fefefe;
+    padding: 8px 12px;
+    width: 100%;
+    text-align: center;
+    background-color: #141414;
+    border-radius: 8px 8px 0 0;
+    z-index: 1;
+}
+
+.meus-filmes ul li div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.meus-filmes ul li:hover div {
+    opacity: 1;
+}
+
+.meus-filmes ul li div a {
+    text-decoration: none;
+    color: #e5e5e5;
+    font-size: 16px;
+    margin-right: 16px;
+    transition: color 0.3s ease;
+}
+
+.meus-filmes ul li div a:hover {
+    color: #b3b3b3;
+}
+
+.meus-filmes ul li div button {
+    background-color: #e50914;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.meus-filmes ul li div button:hover {
+    background-color: #f40612;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 1200px) {
+    .meus-filmes ul {
+        grid-template-columns: repeat(3, 1fr); /* 3 itens por linha */
+    }
+}
+
+@media (max-width: 900px) {
+    .meus-filmes ul {
+        grid-template-columns: repeat(2, 1fr); /* 2 itens por linha */
+    }
+}
+
+@media (max-width: 600px) {
+    .meus-filmes ul {
+        grid-template-columns: 1fr; /* 1 item por linha */
+    }
+}

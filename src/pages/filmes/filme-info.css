@@ -1,0 +1,382 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Para que o fundo não se mova com o scroll */
+}
+
+.filme-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    height: 100vh; 
+    padding: 0 100px; /* Distância maior das bordas laterais */
+    box-sizing: border-box;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.5); /* Opcional, para contraste */
+    color: white; /* Se necessário, para garantir que o texto seja legível */
+    position: relative;
+    overflow: hidden;
+}
+
+.filme-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(11, 6, 4, 0.7) 6%, rgba(75, 42, 29, 0.316) 22%, rgba(14, 7, 6, 0.7) 50%, rgb(0, 0, 0) 100%);
+    z-index: 1;
+    pointer-events: none; /* Garante que o gradiente não interfira com cliques */
+}
+
+.filme-info::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px); /* Aplica o blur */
+    z-index: 1;
+    pointer-events: none;
+    mask-image: linear-gradient(90deg, black 6%, transparent 22%, black 46%);
+    -webkit-mask-image: linear-gradient(90deg, black 6%, transparent 22%, black 50%);
+}
+
+.content {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2; /* Garante que o conteúdo apareça acima do filtro */
+}
+
+.content h1 {
+    flex: 1;
+    display: flex;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    margin: 0;
+    color: rgb(239, 228, 228);
+    max-width: 500px;
+}
+
+.details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 150px;
+    max-width: 60%; /* Limita a largura para focar na sinopse */
+    position: relative;
+    z-index: 2; /* Garante que os detalhes apareçam acima do fundo */
+}
+
+.details h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.details p {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: justify;
+    line-height: 1.6; /* Melhora a legibilidade do texto */
+}
+
+.details strong {
+    font-size: 1.2rem;
+}
+
+.area-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.area-buttons button {
+    margin-top: 14px;
+    font-size: 20px;
+    border: 0;
+    outline: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.area-buttons button:hover {
+    background-color: rgb(171, 18, 18);
+    color: white;
+}
+
+.area-buttons a {
+    text-decoration: none;
+    color: black;
+    transition: all 0.1s;
+}
+
+.area-buttons a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.area-buttons button:first-child {
+    background-color: rgb(171, 18, 18); /* Cor vermelha por padrão */
+    color: white; /* Cor do texto branco por padrão */
+}
+
+.area-buttons button:first-child:hover {
+    background-color: transparent; /* Torna o fundo transparente ao passar o mouse */
+    color: rgb(0, 0, 0); /* Muda a cor do texto para preto ao passar o mouse */
+    background-color: white;
+}
+
+.avaliacao-texto {
+    color: rgb(237, 40, 40);
+}
+
+
+/* Media Queries */
+
+
+/* Large Tablets / Small Desktops */
+@media (max-width: 1366px) {
+    .content {
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    .details {
+        padding-left: 30px;
+        max-width: 90%;
+    }
+
+    .details h2 {
+        font-size: 1.6rem;
+    }
+
+    .details p {
+        font-size: 1rem;
+    }
+
+    .details strong {
+        font-size: 1.3rem;
+    }
+
+    .area-buttons {
+        display: flex; /* Garante que o contêiner é flexível */
+        flex-direction: row !important; /* Alinha os botões horizontalmente */
+        gap: 5px; /* Espaçamento entre os botões */
+        justify-content: center; /* Centraliza os botões horizontalmente */
+        flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
+    }
+
+    .area-buttons button {
+        flex: 1; /* Faz com que os botões ocupem espaço igual */
+        font-size: 15px !important; 
+        padding: 10px; /* Ajusta o padding para garantir que o texto não fique muito pequeno */
+    }
+
+    .area-buttons a {
+        color: inherit; /* Garante que o link herde a cor do botão */
+        text-decoration: none; /* Remove o sublinhado do link */
+    }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .content {
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    .details {
+        padding-left: 20px;
+        max-width: 100%;
+    }
+
+    .details h2 {
+        font-size: 1.4rem;
+    }
+
+    .details p {
+        font-size: 0.9rem;
+    }
+
+    .details strong {
+        font-size: 1.2rem;
+    }
+
+    .area-buttons {
+        display: flex; /* Garante que o contêiner é flexível */
+        flex-direction: row !important; /* Alinha os botões horizontalmente */
+        gap: 5px; /* Espaçamento entre os botões */
+        justify-content: center; /* Centraliza os botões horizontalmente */
+        flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
+    }
+
+    .area-buttons button {
+        flex: 1; /* Faz com que os botões ocupem espaço igual */
+        font-size: 15px !important; 
+        padding: 10px; /* Ajusta o padding para garantir que o texto não fique muito pequeno */
+    }
+
+    .area-buttons a {
+        color: inherit; /* Garante que o link herde a cor do botão */
+        text-decoration: none; /* Remove o sublinhado do link */
+    }
+}
+
+/* Large Mobile / Small Tablets */
+@media (max-width: 768px) {
+    .filme-info {
+        padding: 0 10px; /* Reduz o padding para telas menores */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .details {
+        padding-left: 0;
+        max-width: 100%;
+    }
+
+    .details h2 {
+        font-size: 1.2rem;
+    }
+
+    .details p {
+        font-size: 0.8rem;
+    }
+
+    .details strong {
+        font-size: 1rem;
+    }
+
+    .area-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .area-buttons button {
+        font-size: 12px;
+        width: 100%;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 540px) {
+    .filme-info {
+        padding: 0 5px; /* Ajusta o padding para telas muito pequenas */
+    }
+
+    h1 {
+        font-size: 2rem !important ;
+    }
+
+    .details {
+        padding-left: 0;
+        max-width: 100%;
+        margin-top: -100px;
+    }
+
+    .details h2 {
+        font-size: 1.5rem !important;
+    }
+
+    .details p {
+        font-size: 0.8rem !important;
+    }
+
+    .details strong {
+        font-size: 0.9rem;
+    }
+
+    .area-buttons {
+        display: flex; /* Garante que o contêiner é flexível */
+        flex-direction: row !important; /* Alinha os botões horizontalmente */
+        gap: 5px; /* Espaçamento entre os botões */
+        justify-content: center; /* Centraliza os botões horizontalmente */
+        flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
+    }
+
+    .area-buttons button {
+        flex: 1; /* Faz com que os botões ocupem espaço igual */
+        font-size: 15px !important; 
+        padding: 10px; /* Ajusta o padding para garantir que o texto não fique muito pequeno */
+    }
+
+    .area-buttons a {
+        color: inherit; /* Garante que o link herde a cor do botão */
+        text-decoration: none; /* Remove o sublinhado do link */
+    }
+}
+
+/* Extra small devices (phones in portrait mode) */
+@media (max-width: 480px) {
+    .content {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .details {
+        padding-left: 0;
+        max-width: 100%;
+    }
+
+    .details h2 {
+        font-size: 0.8rem;
+    }
+
+    .details p {
+        font-size: 0.6rem;
+    }
+
+    .details strong {
+        font-size: 0.8rem;
+    }
+
+    .area-buttons {
+        display: flex; /* Garante que o contêiner é flexível */
+        flex-direction: row !important; /* Alinha os botões horizontalmente */
+        gap: 5px; /* Espaçamento entre os botões */
+        justify-content: center; /* Centraliza os botões horizontalmente */
+        flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
+    }
+
+    .area-buttons button {
+        flex: 1; /* Faz com que os botões ocupem espaço igual */
+        font-size: 15px !important; 
+        padding: 10px; /* Ajusta o padding para garantir que o texto não fique muito pequeno */
+    }
+
+    .area-buttons a {
+        color: inherit; /* Garante que o link herde a cor do botão */
+        text-decoration: none; /* Remove o sublinhado do link */
+    }
+}

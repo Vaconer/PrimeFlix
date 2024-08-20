@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo de barra de rolagem para Firefox */
+html {
+  scrollbar-width: thin; /* Largura fina da barra de rolagem */
+  scrollbar-color: #444 #222; /* Cor do polegar e do trilho */
+}
+
+body {
+
+  background-color: rgba(0, 0, 0, 0.882);
+  color: white;
+}
+
+/* Aplicando as fontes aos elementos */
+h1 {
+  font-family: 'Bebas Neue', sans-serif; /* Fonte para títulos grandes */
+}
+
+h2 {
+  font-family: 'Playfair Display', serif; /* Fonte para subtítulos, elegante e cinematográfica */
+}
+
+button {
+  font-family: 'Montserrat', sans-serif; /* Fonte moderna e limpa para botões */
+}
+
+a {
+  font-family: 'Playfair Display', serif; /* Fonte elegante para links */
+}
+
+p {
+  font-family: 'Roboto Slab', serif; /* Fonte para destaque nos parágrafos */
+  font-size: 18px; /* Tamanho da fonte */
+  line-height: 1.6; /* Altura da linha para melhor legibilidade */
+  color: #dfdfdf; /* Cor do texto */
+}
+
+.app {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Estilo global para a barra de rolagem */
+::-webkit-scrollbar {
+  width: 12px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+  background: #222; /* Cor do fundo da área de rolagem */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444; /* Cor do "polegar" da barra de rolagem */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666; /* Cor do "polegar" da barra de rolagem ao passar o mouse */
+}

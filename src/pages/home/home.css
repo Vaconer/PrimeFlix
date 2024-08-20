@@ -1,0 +1,273 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Altura total da tela */
+    margin: 0;
+    padding: 0;
+}
+
+.featured-movie {
+    position: relative;
+    height: 100%; /* Ajuste conforme necessário */
+    overflow: hidden;
+}
+
+.featured-movie img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-movie::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    z-index: 1; /* Garante que o gradiente fique abaixo do texto */
+}
+
+.message-not-movie{
+    height: 200px;
+    width: 100%;
+    display: flex;
+    color: white;
+}
+.featured-info {
+    position: absolute; /* Permite que o texto seja posicionado sobre o gradiente */
+    bottom: 10%; /* Ajuste conforme necessário */
+    left: 5%; /* Ajuste conforme necessário */
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    z-index: 2; /* Garante que o texto fique acima do gradiente */
+}
+
+.featured-info h1 {
+    font-size: 2.7rem;
+    margin: 0;
+    color: white;
+}
+
+.featured-info p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: whitesmoke;
+    text-align: justify;
+}
+
+.featured-link {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    background-color: #e50914ce;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.featured-link:hover {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 40%; /* Ocupa 50% da altura da tela */
+    overflow: hidden; /* Esconde os itens que ultrapassam o contêiner */
+    margin-top: 0; /* Remove o espaço superior */
+    margin-bottom: 5px
+}
+
+.lista-filmes {
+    display: flex;
+    transition: transform 0.3s ease;
+    width: 100%;
+}
+
+.lista-filmes article {
+    flex: 0 0 20%; /* Ajusta a largura dos itens para 20% cada */
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.lista-filmes article.first-item {
+    flex: 0 0 60vw; /* Largura especial para o primeiro item */
+}
+
+.lista-filmes strong {
+    margin-bottom: 14px;
+    text-align: center;
+    font-size: 22px;
+    display: block;
+}
+
+.lista-filmes img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    display: block;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.lista-filmes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0;
+    font-size: 20px;
+    background-color: transparent;
+    text-decoration: none;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.lista-filmes a:hover {
+    background-color: #e50914d8;
+    color: white;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.slider-button.prev {
+    left: 20px;
+}
+
+.slider-button.next {
+    right: 20px;
+}
+
+.slider-button.prev:hover, .slider-button.next:hover {
+    background-color: #e50914cc;
+}
+
+/* Media Queries para responsividade */
+
+/* Tablets e dispositivos menores */
+@media (max-width: 992px) {
+    .featured-info {
+        max-width: 80%;
+        left: 10px;
+        bottom: 10px;
+        padding: 10px;
+    }
+
+    .lista-filmes article {
+        min-width: calc(100% / 3); /* Mostra 3 filmes por vez */
+    }
+
+    .slider-button {
+        padding: 8px;
+    }
+}
+
+/* Tablets e smartphones */
+@media (max-width: 768px) {
+    .featured-info {
+        max-width: 90%;
+        width: 70%;
+    }
+
+    .featured-info h1 {
+        font-size: 3.5rem;
+    }
+    
+    .featured-info p {
+        font-size: 1.2rem;
+    }
+
+    .lista-filmes article {
+        min-width: calc(100% / 2); /* Mostra 2 filmes por vez */
+    }
+
+    .slider-button {
+        padding: 6px;
+    }
+
+    .lista-filmes a {
+        background-color: #e50914c7;
+    }   
+    
+}
+
+/* Smartphones */
+@media (max-width: 576px) {
+    .featured-movie {
+        position: relative;
+        height: 70vh; /* Ajuste conforme necessário */
+        overflow: hidden;
+    }
+    
+    .featured-info {
+        max-width: 100%;
+        padding: 8px;
+        width: 80%;
+    }
+
+    .lista-filmes article {
+        min-width: 100%; /* Mostra 1 filme por vez */
+    }
+
+    .slider-button {
+        padding: 5px;
+    }
+
+    .featured-info h1 {
+        font-size: 2.2rem;
+    }
+    
+    .featured-info p {
+        font-size: 0.7rem;
+    }
+    
+    .featured-link {
+        font-size: 1rem;
+    }
+
+    .lista-filmes a {
+        background-color: #e50914c7;
+    }
+
+}
+
+@media (max-width: 540px) and (max-height: 720px) {
+
+    .featured-movie {
+        height: 100vh; /* Ajuste conforme necessário */
+    }
+
+    .lista-filmes article {
+        min-width: calc(100% / 2); /* Mostra 3 filmes por vez */
+    }
+ 
+}
+
+@media (max-width: 1024px) and (max-height: 600px) {
+    .featured-movie {
+        position: relative;
+        height: 105%; /* Ajuste conforme necessário */
+        overflow: hidden;
+    }
+}
