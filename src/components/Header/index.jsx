@@ -2,6 +2,7 @@ import './header.css';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Select } from './components/Select';
+import { FaFilm } from 'react-icons/fa';
 
 function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,7 +50,9 @@ function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
   return (
     <header>
       <div className="menu">
-        <Link className='logo' to={"/"}>Prime Flix</Link>
+      <Link className='logo' to={"/"}>
+        <FaFilm size={40} /> 
+      </Link>
 
         <div className="menu-toggle" onClick={toggleMenu}>☰</div>
 
