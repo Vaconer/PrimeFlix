@@ -82,6 +82,7 @@ body {
     text-decoration: none;
     border-radius: 4px;
     margin-top: 10px;
+    border: 1px solid transparent;
 }
 
 .featured-link:hover {
