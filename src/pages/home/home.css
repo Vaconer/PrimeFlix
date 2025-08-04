@@ -362,12 +362,12 @@ body {
 }
 
 .btn-primary {
-    background-color: #01b4e4;
+    background-color: #e40101;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #0292c3;
+    background-color: #aa0404;
 }
 
 .btn-secondary {
