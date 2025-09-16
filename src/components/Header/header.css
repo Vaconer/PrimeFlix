@@ -11,7 +11,7 @@ header {
     left: 0;
     z-index: 1000;
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(5px);
 }
 
 /* Menu principal */
@@ -29,7 +29,7 @@ header {
     cursor: pointer;
     color: rgb(227, 227, 227);
     font-weight: bold;
-    margin-right: 20px; 
+    margin-right: 20px;
 }
 
 /* Estilo dos links do menu */
@@ -66,31 +66,31 @@ header {
 
 /* Estilo do input de pesquisa */
 .search-bar input {
-    padding: 5px;
+    padding: 13px;
     border-radius: 20px;
     border: 1px solid #ccc;
     width: 400px;
     margin-left: 50px;
-    font-size: 16px; 
-    color: #fff; 
+    font-size: 16px;
+    color: #fff;
     background-color: transparent;
 }
 
 /* Estilo do placeholder do input de pesquisa */
 .search-bar input::placeholder {
-    color: #d6d6d6; 
-    font-style: italic; 
+    color: #d6d6d6;
+    font-style: italic;
 }
 
 /* Cor do placeholder quando o campo está focado */
 .search-bar input:focus::placeholder {
-    color: #d8d8d8; 
+    color: #d8d8d8;
 }
 
 /* Estilo do ícone de pesquisa */
 .search-bar i {
-    margin-left: -30px; 
-    color: #c0c0c0; 
+    margin-left: -30px;
+    color: #c0c0c0;
     cursor: pointer;
 }
 
@@ -100,11 +100,11 @@ header {
     font-size: 30px;
     cursor: pointer;
     color: rgb(227, 227, 227);
-    position: absolute; /* Fixar o botão */
-    top: 0; /* Colar no topo */
-    right: 20px; /* Ajustar a distância do lado direito */
-    padding: 15px; /* Adicionar padding para melhor clique */
-    z-index: 1100; /* Garantir que o botão esteja acima de outros elementos */
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: 8px;
+    z-index: 1100;
 }
 
 /* Estilo do menu de navegação (oculto em telas pequenas) */
@@ -129,7 +129,8 @@ header {
 }
 
 /* Estilo do submenu de categorias */
-.categories-dropdown, .genres-dropdown {
+.categories-dropdown,
+.genres-dropdown {
     display: none;
     position: absolute;
     background-color: rgba(24, 24, 24, 0.848);
@@ -141,8 +142,10 @@ header {
 
 /* Estilo específico para o submenu de gêneros */
 .genres-dropdown {
-    max-height: 300px; /* Ajuste a altura máxima conforme necessário */
-    overflow-y: auto;  /* Adiciona a barra de rolagem se o conteúdo exceder a altura */
+    max-height: 300px;
+    /* Ajuste a altura máxima conforme necessário */
+    overflow-y: auto;
+    /* Adiciona a barra de rolagem se o conteúdo exceder a altura */
 }
 
 /* Exibir submenu de categorias e gêneros ao passar o mouse sobre o item de categoria e gêneros */
@@ -168,8 +171,6 @@ header {
     background-color: rgba(255, 255, 255, 0.063);
 }
 
-
-
 /* Adapte o menu para diferentes resoluções */
 @media (max-width: 1187px) {
     .search-bar input {
@@ -189,22 +190,20 @@ header {
 
 @media (max-width: 768px) {
     .menu {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .logo {
-        margin-top: 30px;
+        display: flex;
+        width: 75%;
     }
 
     .search-bar {
-        display: flex; /* Alterado de none para flex */
+        display: flex;
+        /* Alterado de none para flex */
         width: 100%;
         margin-top: 10px;
     }
 
     .search-bar input {
-        width: 100%; /* Fazer a barra de pesquisa ocupar toda a largura disponível */
+        width: 100%;
+        /* Fazer a barra de pesquisa ocupar toda a largura disponível */
     }
 
     .menu-toggle {
@@ -214,7 +213,8 @@ header {
     .nav-menu {
         display: none;
         flex-direction: column;
-        width: 100%; /* O menu ocupa a largura total */
+        width: 100%;
+        /* O menu ocupa a largura total */
     }
 
     .nav-menu.active {
@@ -224,6 +224,656 @@ header {
 
 @media (max-width: 480px) {
     .search-bar input {
-        width: 100%; /* Ajusta a largura da barra de pesquisa em telas muito pequenas */
+        width: 100%;
+        /* Ajusta a largura da barra de pesquisa em telas muito pequenas */
     }
+}
+
+/* ============================= */
+/*       APENAS A ALTERAÇÃO      */
+/* ============================= */
+
+/* Utilitários de visibilidade para controlar onde a busca aparece */
+.desktop-only {
+    display: flex;
+}
+
+.mobile-only {
+    display: none;
+}
+
+/* Botão da lupa visível no mobile (fora do menu) */
+.search-toggle {
+    background: transparent;
+    border: 0;
+    color: rgb(227, 227, 227);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer;
+    display: none;
+}
+
+/* Overlay fininho de busca no topo, como no YouTube */
+.search-overlay {
+    display: none;
+    /* habilitado no mobile */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    /* mesma altura do header */
+    padding: 10px 16px;
+    background-color: rgba(0, 0, 0, 0.96);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1200;
+    /* acima do header (1000) e do menu (1100) */
+    transform: translateY(-100%);
+    transition: transform 0.2s ease;
+}
+
+.search-overlay.open {
+    transform: translateY(0);
+}
+
+.search-input-wrap {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0 12px;
+    width: 100%;
+}
+
+.search-icon-left {
+    color: #c0c0c0;
+    pointer-events: none;
+}
+
+.search-input-wrap input {
+    flex: 1;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+.search-input-wrap input::placeholder {
+    color: #d6d6d6;
+    font-style: italic;
+}
+
+/* Regras apenas para telas pequenas */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: inline-flex !important;
+    }
+
+    /* Esconde a barra de busca de dentro do menu no mobile */
+    .nav-menu .search-bar {
+        display: none !important;
+    }
+
+    /* Exibe o overlay de busca quando aberto */
+    .search-overlay {
+        display: block;
+    }
+}
+
+/* ============================= */
+/*   ANIMAÇÃO DO MENU (MOBILE)   */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+    /* Painel desliza de leve ao abrir */
+    @keyframes menuPanelIn {
+        from {
+            transform: translateY(-8px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Cada item entra com fade + slide */
+    @keyframes menuItemIn {
+        from {
+            opacity: 0;
+            transform: translateY(-6px) scale(0.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Anima o container do menu quando ativo */
+    .nav-menu.active {
+        animation: menuPanelIn 220ms ease both;
+    }
+
+    /* Base para todos os itens do menu */
+    .nav-menu.active>* {
+        opacity: 0;
+        /* estado inicial para a animação */
+        animation: menuItemIn 280ms ease forwards;
+    }
+
+    /* Stagger (atrasos em cascata por ordem visual) */
+    .nav-menu.active>*:nth-child(1) {
+        animation-delay: 60ms;
+    }
+
+    .nav-menu.active>*:nth-child(2) {
+        animation-delay: 110ms;
+    }
+
+    .nav-menu.active>*:nth-child(3) {
+        animation-delay: 160ms;
+    }
+
+    .nav-menu.active>*:nth-child(4) {
+        animation-delay: 210ms;
+    }
+
+    .nav-menu.active>*:nth-child(5) {
+        animation-delay: 260ms;
+    }
+
+    .nav-menu.active>*:nth-child(6) {
+        animation-delay: 310ms;
+    }
+
+    /* A barra de busca interna já está oculta no mobile, então o stagger
+     vai pegar Home, Categoria, Gêneros, Filmes e Meus Filmes nessa ordem. */
+
+    /* Acessibilidade: reduz ou remove animação para quem prefere menos movimento */
+    @media (prefers-reduced-motion: reduce) {
+
+        .nav-menu.active,
+        .nav-menu.active>* {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+}
+
+/* ---------- 1) BRIDGE: mantém :hover enquanto você desce pro dropdown ---------- */
+.menu .categories,
+.menu .genres {
+    position: relative;
+}
+
+/* cria uma faixa invisível logo abaixo do item do menu */
+.menu .categories::after,
+.menu .genres::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 12px;
+    /* faixa “amortecedora” */
+    /* sem background; ela só existe pra manter o :hover do pai */
+    z-index: 1201;
+    /* acima do fundo, abaixo do dropdown */
+}
+
+/* ---------- 2) Delay para SUMIR (e show imediato) ---------- */
+.categories-dropdown,
+.genres-dropdown {
+    /* posicione colado ao item do menu; sem “gap” real */
+    top: calc(100% + 8px);
+    left: 0;
+
+    /* estado oculto (padrão) */
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+    visibility: hidden;
+    pointer-events: none;
+
+    /* IMPORTANTE: adiciona atraso para iniciar o fade-out (sumir) */
+    transition:
+        opacity 180ms ease 160ms,
+        /* 160ms de espera + 180ms de fade */
+        transform 180ms ease 160ms,
+        visibility 0s linear 340ms;
+    /* só troca visibility depois do fade */
+}
+
+/* estado visível (sem atraso pra aparecer) */
+.menu .categories:hover .categories-dropdown,
+.menu .genres:hover .genres-dropdown,
+.categories-dropdown:hover,
+.genres-dropdown:hover {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+
+    /* remove qualquer delay quando for APARECER */
+    transition-delay: 0s, 0s, 0s;
+}
+
+/* ============================= */
+/*  GAP MAIOR + HOVER SEGURO     */
+/* ============================= */
+
+/* cada gatilho (Categoria/Gêneros) ganha um "colchão" invisível */
+.menu .categories,
+.menu .genres {
+    position: relative;
+
+    /* ajuste o quão longe o dropdown fica do gatilho */
+    --dd-offset: 10px;
+    /* aumente p/ 36px, 48px... se quiser mais espaço */
+
+    /* TRUQUE: estica a área de hover sem mexer no layout visual */
+    padding-bottom: var(--dd-offset);
+    margin-bottom: calc(-1 * var(--dd-offset));
+}
+
+/* ============================= */
+/*  DROPDOWN (mais pra baixo)    */
+/* ============================= */
+
+.menu .categories .categories-dropdown,
+.menu .genres .genres-dropdown {
+    display: block !important;
+    position: absolute;
+    top: calc(100% + var(--dd-offset));
+    /* fica mais longe do gatilho */
+    left: 0;
+    min-width: 240px;
+    max-height: 360px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    z-index: 1300;
+
+    /* ====== GLASS/BLUR estiloso ====== */
+    background:
+        radial-gradient(120% 100% at 0% 0%, rgba(255, 255, 255, 0.115) 0%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0) 60%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%),
+        rgba(15, 15, 15, 0.70);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+
+    /* Estado oculto (com fade/scale) */
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    visibility: hidden;
+    pointer-events: none;
+
+    /* Delay p/ sumir (perdoa o mouse) */
+    transition:
+        opacity 220ms ease 160ms,
+        transform 220ms ease 160ms,
+        visibility 0s linear 380ms;
+}
+
+/* Visível: hover no gatilho, foco dentro ou hover no próprio dropdown */
+.menu .categories:hover .categories-dropdown,
+.menu .genres:hover .genres-dropdown,
+.menu .categories:focus-within .categories-dropdown,
+.menu .genres:focus-within .genres-dropdown,
+.menu .categories .categories-dropdown:hover,
+.menu .genres .genres-dropdown:hover {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s, 0s, 0s;
+}
+
+/* ============================= */
+/*  ITENS + efeito de entrada    */
+/* ============================= */
+.menu .categories .categories-dropdown a,
+.menu .genres .genres-dropdown a {
+    display: block;
+    padding: 10px 12px;
+    color: #ECECEC;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 8px;
+
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 180ms ease, transform 180ms ease, background-color 120ms ease;
+}
+
+.menu .categories:hover .categories-dropdown a,
+.menu .genres:hover .genres-dropdown a,
+.menu .categories:focus-within .categories-dropdown a,
+.menu .genres:focus-within .genres-dropdown a,
+.menu .categories .categories-dropdown:hover a,
+.menu .genres .genres-dropdown:hover a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.menu .categories .categories-dropdown a:hover,
+.menu .genres .genres-dropdown a:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* ============================= */
+/*  SETINHA (nasce do canto)     */
+/* ============================= */
+.menu .categories .categories-dropdown::before,
+.menu .genres .genres-dropdown::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 14px;
+    /* ajuste fino horizontal */
+    top: 0;
+    /* colada ao topo do dropdown */
+    transform: translateY(-50%) rotate(45deg);
+    border-radius: 2px;
+
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 100%),
+        rgba(15, 15, 15, 0.50);
+    border-left: 1px solid rgba(255, 255, 255, 0.10);
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    backdrop-filter: inherit;
+    -webkit-backdrop-filter: inherit;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================= */
+/*  HEADER glass (coerente)      */
+/* ============================= */
+header {
+    background: rgba(10, 10, 10, 0.55) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================= */
+/*  MOBILE & acessibilidade      */
+/* ============================= */
+/* @media (max-width: 768px) {
+  .menu .categories .categories-dropdown,
+  .menu .genres .genres-dropdown {
+    display: none !important;    /* no mobile, dropdown via toque */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .menu .categories .categories-dropdown,
+    .menu .genres .genres-dropdown,
+    .menu .categories .categories-dropdown a,
+    .menu .genres .genres-dropdown a {
+        transition: none !important;
+    }
+}
+
+/* ============================= */
+/*  MOBILE: filtros sempre abertos */
+/* ============================= */
+@media (max-width: 768px) {
+
+    /* remove offsets/bridges do desktop */
+    .menu .categories,
+    .menu .genres {
+        --dd-offset: 0px;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .menu .categories::after,
+    .menu .genres::after {
+        display: none;
+    }
+
+    /* painéis SEMPRE visíveis no mobile */
+    .menu .categories .categories-dropdown,
+    .menu .genres .genres-dropdown {
+        position: static !important;
+        inset: auto !important;
+        width: 100%;
+        margin-top: 6px;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        backdrop-filter: none;
+        padding: 0;
+
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* esconde “setinha” */
+    .menu .categories .categories-dropdown::before,
+    .menu .genres .genres-dropdown::before {
+        display: none !important;
+    }
+
+    /* estilo chip acessível ao toque */
+    .menu .categories .categories-dropdown a,
+    .menu .genres .genres-dropdown a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        color: #ECECEC;
+        font-size: 14px;
+        letter-spacing: .2px;
+        text-decoration: none;
+
+        opacity: 1 !important;
+        transform: none !important;
+        transition: background-color 120ms ease, transform 80ms ease;
+        margin: 2px;
+    }
+
+    .menu .categories .categories-dropdown a:active,
+    .menu .genres .genres-dropdown a:active {
+        transform: scale(0.98);
+    }
+
+    /* Categorias: poucos itens -> carrossel horizontal */
+    .menu .categories .categories-dropdown {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        margin-bottom: 4%;
+    }
+
+    .menu .categories .categories-dropdown::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .menu .categories .categories-dropdown::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.22);
+        border-radius: 3px;
+    }
+
+    /* Gêneros: muitos itens -> grade rolável */
+    .menu .genres .genres-dropdown {
+        flex-wrap: wrap;
+        gap: 8px;
+        max-height: 40vh;
+        overflow-y: auto;
+        padding-right: 4px;
+    }
+
+    .menu .genres .genres-dropdown::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .menu .genres .genres-dropdown::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.22);
+        border-radius: 3px;
+    }
+
+    /* mantém a barra de busca interna oculta no mobile */
+    .nav-menu .search-bar {
+        display: none !important;
+    }
+
+    /* acessibilidade: sem animações */
+    @media (prefers-reduced-motion: reduce) {
+
+        .menu .categories .categories-dropdown,
+        .menu .genres .genres-dropdown {
+            transition: none !important;
+        }
+    }
+}
+
+/* Lista de chips no mobile */
+.mobile-chip-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  padding-right: 4px;
+}
+
+/* Chip base */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ECECEC;
+  font-size: 14px;
+  letter-spacing: .2px;
+  text-decoration: none;
+  transition: background-color 120ms ease, transform 80ms ease, border-color 120ms ease, box-shadow 120ms ease;
+  user-select: none;
+}
+
+/* Toque/feedback */
+.chip:active {
+  transform: scale(0.98);
+}
+
+/* Estado selecionado (fica “ligado” após o clique) */
+.chip.is-selected {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+}
+
+/* Check sutil no chip selecionado */
+.chip.is-selected::after {
+  content: "✓";
+  margin-left: 8px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Acessibilidade */
+.chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.28), 0 0 0 5px rgba(0,0,0,0.35);
+}
+
+/* Lista de chips (desktop e mobile) */
+.chip-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  padding-right: 4px;
+}
+
+/* No desktop, pode ficar em grid bonitinho */
+@media (min-width: 769px) {
+  .chip-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+}
+
+/* Chip base */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ECECEC;
+  font-size: 14px;
+  letter-spacing: .2px;
+  text-decoration: none;
+  transition: background-color 120ms ease, transform 80ms ease, border-color 120ms ease, box-shadow 120ms ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.chip:hover { background: rgba(255,255,255,0.10); }
+
+/* Toque/feedback */
+.chip:active { transform: scale(0.98); }
+
+/* Estado selecionado */
+.chip.is-selected {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+}
+
+/* Check sutil no chip selecionado */
+.chip.is-selected::after {
+  content: "✓";
+  margin-left: 8px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Acessibilidade */
+.chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.28), 0 0 0 5px rgba(0,0,0,0.35);
 }

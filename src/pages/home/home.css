@@ -530,6 +530,10 @@ body {
         /* Torna todos os itens visíveis */
     }
 
+    .filme-poster{
+        margin-top: 30%;
+    }
+
     .lista-filmes {
         flex-direction: column;
         /* Alinha os filmes verticalmente */
