@@ -191,12 +191,11 @@ header {
 
 @media (max-width: 768px) {
     .menu {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        width: 90%;
-        padding: 0 12px;
+        grid-gap: 8px;
         gap: 8px;
+        grid-template-columns: auto 1fr auto;
+        padding: 0 12px;
+        width: 90%;
     }
 
     .search-bar {
