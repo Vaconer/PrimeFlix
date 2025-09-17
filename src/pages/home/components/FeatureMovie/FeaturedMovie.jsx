@@ -24,7 +24,7 @@ function FeaturedMovie({ film }) {
 
                         <p className="featured-rating">⭐ {film.vote_average.toFixed(1)} / 10</p>
 
-                        <Link to={`/filme/${film.id}`} className="featured-link">Acessar</Link>
+                        <Link to={`/filme/${film.id}`} className="featured-link">Detalhes</Link>
                     </div>
                 </>
             )}

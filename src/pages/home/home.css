@@ -1,3 +1,17 @@
+:root{
+  --cols: 5;                 /* qtde de cards por página no desktop */
+  --gap: 16px;               /* espaço entre cards */
+  --radius: 12px;            /* raio padrão */
+  --arrow-size: 44px;        /* diâmetro setas */
+  --arrow-bg: rgba(20,20,20,.55);
+  --arrow-bg-hover: rgba(229,9,20,.85);
+  --card-bg: rgba(255,255,255,.04);
+  --card-bd: rgba(255,255,255,.12);
+  --card-shadow: 0 10px 30px rgba(0,0,0,.35);
+  --arrow-stroke: 3px;
+  --arrow-ring: rgba(229,9,20,.35);
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -11,6 +25,7 @@ body {
     /* Garante que o contêiner ocupe pelo menos a altura da tela */
     margin: 0;
     padding: 0;
+    background-color: #040404;
 }
 
 .featured-movie {
@@ -22,7 +37,7 @@ body {
 
 .featured-backdrop {
     width: 100%;
-    height: 80vh;
+    height: 75vh;
     object-fit: cover;
 }
 
@@ -73,32 +88,157 @@ body {
     margin: 15px 0;
 }
 
-.featured-link {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1.25rem;
-    background-color: #e50914ce;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 10px;
-    border: 1px solid transparent;
+/* ===== Botão Detalhes — Cinema/Netflix + UI animation (apenas .featured-link) ===== */
+
+/* ===== Botão Detalhes — cinema vibe, animação interna, sem crescer ===== */
+.featured-link{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  padding:12px 22px;
+  font-size:1rem;
+  font-weight:800;
+  letter-spacing:.25px;
+  color:#fff;
+  text-decoration:none;
+  border-radius:0 0 10px 10px; /* mantém encaixe no poster */
+  cursor:pointer;
+
+  /* base “Netflixy” + trilho de progresso por baixo */
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.12), transparent 50%) 0 0 / 0% 100% no-repeat, /* trilho progr. */
+    linear-gradient(135deg,#e50914 0%, #b81d24 50%, #7a0a10 100%) 0 0 / 200% 100% no-repeat; /* gradiente vivo */
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 10px 20px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12);
+  overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-size .8s cubic-bezier(.22,.61,.36,1), background-position .35s ease;
 }
 
-.featured-link:hover {
-    background-color: transparent;
-    color: white;
-    border: 1px solid white;
+/* feixe do projetor atravessando o botão */
+.featured-link::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  mix-blend-mode:screen;
+  background:
+    linear-gradient(120deg, transparent 40%, rgba(255,255,255,.42) 50%, transparent 60%);
+  transform:translateX(-150%) skewX(-18deg);
+  opacity:.18;
 }
 
-.slider-container {
-    flex: 0 0 30%;
-    /* Ocupa 30% da altura da tela */
-    position: relative;
-    width: 100%;
-    /* overflow: hidden; */
-    margin-top: 0;
-    margin-bottom: 5px;
+/* UX writing opcional: usar data-ux="Ver detalhes do filme" no JSX
+   Se tiver o atributo, mostramos o texto como subtítulo interno */
+.featured-link[data-ux]::after{
+  content:attr(data-ux);
+  position:absolute;
+  inset:auto 14px 8px 14px; /* bottom interno */
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.15px;
+  opacity:0;
+  transform:translateY(6px);
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  color:rgba(255,255,255,.95);
+  transition:opacity .28s ease, transform .28s ease;
+}
+
+/* Caso NÃO use data-ux, mostramos um chevron discreto */
+.featured-link:not([data-ux])::after{
+  content:"›";
+  position:absolute;
+  right:16px;
+  font-size:1.25em;
+  line-height:1;
+  opacity:.95;
+  transform:translateX(0);
+  transition:transform .22s ease;
+}
+
+/* Hover: anima por dentro (sem scale!) */
+.featured-link:hover{
+  background-size:100% 100%, 100% 100%;    /* barra de progresso + pan do gradiente */
+  background-position:100% 0, 100% 0;
+}
+.featured-link:hover::before{
+  animation:projector-sweep 1100ms ease-out forwards;
+}
+.featured-link:hover:not([data-ux])::after{
+  transform:translateX(5px);
+}
+.featured-link:hover[data-ux]::after{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Foco acessível, sem “pular” */
+.featured-link:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 3px rgba(229,9,20,.35),
+    0 10px 20px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+/* Ativo: leve feedback sem alterar o tamanho */
+.featured-link:active{ filter:saturate(.95) contrast(.98); }
+
+/* Desabilitado (opcional) */
+.featured-link[aria-disabled="true"]{ opacity:.55; pointer-events:none; }
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce){
+  .featured-link{ background-size:0% 100%, 100% 100%; background-position:0 0, 0 0; }
+  .featured-link:hover::before{ animation:none; transform:translateX(-150%) skewX(-18deg); }
+  .featured-link:hover[data-ux]::after{ transition:none; }
+}
+
+/* Evita que estilos do grid derrubem o gradiente do botão */
+.lista-filmes article a.featured-link:hover{
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.12), transparent 50%) 0 0 / 100% 100% no-repeat,
+    linear-gradient(135deg,#e50914 0%, #b81d24 50%, #7a0a10 100%) 100% 0 / 100% 100% no-repeat;
+}
+
+/* Keyframes — feixe do projetor */
+@keyframes projector-sweep{
+  0%   { transform:translateX(-150%) skewX(-18deg); opacity:.18; }
+  40%  { transform:translateX(20%)   skewX(-18deg); opacity:.34; }
+  100% { transform:translateX(150%)  skewX(-18deg); opacity:.18; }
+}
+
+
+
+/* =================================================================== */
+
+.slider-container{
+  position: relative;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 5px;
+  padding-inline: clamp(8px, 2vw, 24px);
+  overflow: hidden;       /* necessário p/ o slide */
+  isolation: isolate;     /* separa camada das máscaras */
+  flex: 0 0 30%;
+}
+
+.slider-container::before,
+.slider-container::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, #0000007a 0%, transparent 21%) left,
+    linear-gradient(-90deg, #0000004b 0%, transparent 21%) right;
+  background-size: 22% 100%, 22% 100%;
+  background-repeat:no-repeat;
+  mix-blend-mode:multiply;
+  opacity:.8;
+  z-index:2;
 }
 
 .lista-filmes {
@@ -155,32 +295,7 @@ body {
     color: white;
 }
 
-.slider-button {
-    position: absolute;
-    top: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-}
 
-.slider-button.prev {
-    left: 20px;
-}
-
-.slider-button.next {
-    right: 20px;
-}
-
-.slider-button.prev:hover,
-.slider-button.next:hover {
-    background-color: #e50914cc;
-}
 
 .featured-rating {
     font-size: 1rem;
@@ -442,9 +557,6 @@ body {
         /* Mostra 3 filmes por vez */
     }
 
-    .slider-button {
-        padding: 8px;
-    }
 }
 
 /* Tablets e smartphones */
@@ -489,10 +601,6 @@ body {
     .lista-filmes article {
         min-width: calc(100% / 2);
         /* Mostra 2 filmes por vez */
-    }
-
-    .slider-button {
-        padding: 6px;
     }
 
     .lista-filmes a {
@@ -602,3 +710,209 @@ body {
     height: 110px;
   }
 }
+
+/* === Slider buttons — minimal/clean === */
+/* Glass mínimo: apenas blur + fundo translúcido */
+.slider-button{
+  --_size: var(--arrow-size, 44px);
+  --_alpha: .22;          /* transparência do fundo */
+  --_alpha-hover: .32;    /* no hover */
+  --_blur: 8px;           /* intensidade do blur */
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  inline-size: var(--_size);
+  block-size: var(--_size);
+
+  display: grid;
+  place-items: center;
+  padding: 0;
+
+  background-color: rgba(0,0,0,var(--_alpha));
+  backdrop-filter: blur(var(--_blur));
+  -webkit-backdrop-filter: blur(var(--_blur));
+
+  border: 0;              /* sem borda */
+  border-radius: 999px;
+  box-shadow: none;       /* sem sombra */
+  color: #fff;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  font-size: 18px;        /* “‹/›” */
+  line-height: 1;
+  cursor: pointer;
+  z-index: 3;
+
+  transition: background-color .15s ease, opacity .15s ease;
+}
+
+.slider-button.prev { left: 16px; }
+.slider-button.next { right: 16px; }
+
+/* Hover/active discretos */
+.slider-button:hover{ background-color: rgba(0,0,0,var(--_alpha-hover)); }
+.slider-button:active{ background-color: rgba(0,0,0,calc(var(--_alpha-hover) + .06)); }
+
+/* Foco simples, sem brilho */
+.slider-button:focus-visible{
+  outline: 2px solid rgba(255,255,255,.35);
+  outline-offset: 2px;
+}
+
+/* Desabilitado */
+.slider-button[disabled],
+.slider-button[aria-disabled="true"]{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* Tamanho em tablets (opcional) */
+@media (max-width: 768px){
+  .slider-button{
+    --_size: clamp(36px, 7vw, 42px);
+    font-size: 16px;
+  }
+}
+
+
+/* Container da imagem para permitir overlay */
+.poster-wrap{
+  position: relative;
+}
+
+/* Fallback quando não há imagem do TMDB */
+.poster-fallback{
+  height: 150px; /* casa com seu max-height atual */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background:
+    radial-gradient(80% 60% at 50% 40%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(135deg, #2a2a2a, #111);
+}
+
+/* Overlay com gradiente cinematográfico + texto */
+.film-caption{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 10px 12px 12px;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 65%, rgba(0,0,0,.9) 100%);
+  /* border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px; */
+  /* micro-efeito de “aparecer” ao hover do card */
+  opacity: .98;
+  transition: opacity .25s ease;
+}
+.lista-filmes article:hover .film-caption{ opacity: 1; }
+
+/* Título com clamp para não quebrar layout */
+.film-title{
+  margin: 0 0 6px 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* até 2 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Linha de metadados (ano, idioma, nota) em chips */
+.film-meta{
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.film-chip{
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: .85rem;
+  line-height: 1;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(2px);
+}
+
+/* Ajuste mobile: título um pouco menor e sem clamp duplo em telas bem pequenas */
+@media (max-width: 480px){
+  .film-title{ font-size: .95rem; -webkit-line-clamp: 2; }
+}
+
+/* ================================================
+   Loop infinito — trilho e páginas (sem mudar tamanho)
+   ================================================ */
+
+/* Trilho horizontal que recebe as páginas (clones incluídos) */
+.slider-track{
+  display: flex;
+  width: 100%;
+  will-change: transform;
+}
+
+/* Cada página ocupa 100% da largura do viewport do slider */
+.slide-page{
+  flex: 0 0 100%;
+  display: flex;          /* mantém seus cards lado a lado */
+  width: 100%;
+}
+
+/* ====== Replicando o estilo dos cards para dentro de .slide-page ====== */
+/* (não altera tamanho: continua 20% = 5 por tela) */
+.slide-page article{
+  flex: 0 0 25%;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.slide-page strong{
+  margin-bottom: 14px;
+  text-align: center;
+  font-size: 22px;
+  display: block;
+}
+
+.slide-page img{
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.slide-page a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  font-size: 20px;
+  background-color: transparent;
+  text-decoration: none;
+  color: white;
+  /* border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; */
+}
+
+.slide-page a:hover{
+  background-color: #e50914d8;
+  color: white;
+}
+
+/* Mobile continua usando a sua .lista-filmes empilhada */
+@media (max-width: 576px){
+  .slider-track{ display: none; }
+}
+
