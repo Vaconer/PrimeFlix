@@ -5,16 +5,17 @@ import { FaFilm, FaSearch } from "react-icons/fa";
 
 function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false); // busca no mobile (fora do menu)
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // estados para manter seleção visível
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
   const location = useLocation();
   const mobileSearchInputRef = useRef(null);
-  const showSearchBar = location.pathname === "/";
+
+  const isHome = location.pathname === "/";
+  const isFavorites = location.pathname === "/favoritos";
 
   const optionsCategory = [
     { name: "Agora em Cartaz", id: "now_playing" },
@@ -35,21 +36,25 @@ function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
   const handleCategoryClick = (id) => {
     setSelectedCategory(id);
     onCategoryChange?.(id);
-    setIsMenuOpen(false); // fecha menu no mobile após escolher
+    setIsMenuOpen(false);
   };
 
   const handleGenreClick = (id) => {
     setSelectedGenre(id);
     onGenreChange?.(id);
-    setIsMenuOpen(false); // fecha menu no mobile após escolher
+    setIsMenuOpen(false);
   };
 
-  // Focar automaticamente no input quando abrir a busca no mobile
   useEffect(() => {
     if (isSearchOpen) {
       setTimeout(() => mobileSearchInputRef.current?.focus(), 0);
     }
   }, [isSearchOpen]);
+
+  // Opcional: ao trocar de rota, fecha o menu aberto
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <header>
@@ -58,8 +63,8 @@ function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
           <FaFilm size={30} />
         </Link>
 
-        {/* Lupa fora do menu (apenas mobile) */}
-        {showSearchBar && (
+        {/* Lupa fora do menu (apenas na Home) */}
+        {isHome && (
           <button
             type="button"
             className="search-toggle mobile-only"
@@ -71,65 +76,64 @@ function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
           </button>
         )}
 
-        <div className="menu-toggle" onClick={toggleMenu} aria-label="Menu">
-          ☰
-        </div>
+        {/* Hamburguer NÃO aparece em /favoritos */}
+        {!isFavorites && (
+          <div className="menu-toggle" onClick={toggleMenu} aria-label="Menu">
+            ☰
+          </div>
+        )}
 
         <nav className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
-          <Link className="links" to={"/"}>
+          {/* <Link className="links" to={"/"}>
             Home
-          </Link>
+          </Link> */}
 
-          {/* CATEGORIAS */}
-          <div className="categories">
-            <Link className="links" to={"/"}>
-              Categoria
-            </Link>
-
-            <div className="categories-dropdown">
-              {/* ÚNICA lista de chips (desktop e mobile) */}
-              <div className="chip-list" role="listbox" aria-label="Categorias">
-                {optionsCategory.map((opt) => (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    className={`chip ${selectedCategory === opt.id ? "is-selected" : ""}`}
-                    onClick={() => handleCategoryClick(opt.id)}
-                    aria-pressed={selectedCategory === opt.id}
-                  >
-                    {opt.name}
-                  </button>
-                ))}
+          {/* CATEGORIAS — só na Home */}
+          {isHome && (
+            <div className="categories">
+              <Link className="links" to={"/"}>Categoria</Link>
+              <div className="categories-dropdown">
+                <div className="chip-list" role="listbox" aria-label="Categorias">
+                  {optionsCategory.map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      className={`chip ${selectedCategory === opt.id ? "is-selected" : ""}`}
+                      onClick={() => handleCategoryClick(opt.id)}
+                      aria-pressed={selectedCategory === opt.id}
+                    >
+                      {opt.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* GÊNEROS */}
-          <div className="genres">
-            <Link className="links" to={"/"}>
-              Gêneros
-            </Link>
-
-            <div className="genres-dropdown">
-              {/* ÚNICA lista de chips (desktop e mobile) */}
-              <div className="chip-list" role="listbox" aria-label="Gêneros">
-                {(Array.isArray(genres) ? genres : []).map((g) => (
-                  <button
-                    key={g.id}
-                    type="button"
-                    className={`chip ${selectedGenre === g.id ? "is-selected" : ""}`}
-                    onClick={() => handleGenreClick(g.id)}
-                    aria-pressed={selectedGenre === g.id}
-                  >
-                    {g.name ?? g.title}
-                  </button>
-                ))}
+          {/* GÊNEROS — só na Home */}
+          {isHome && (
+            <div className="genres">
+              <Link className="links" to={"/"}>Gêneros</Link>
+              <div className="genres-dropdown">
+                <div className="chip-list" role="listbox" aria-label="Gêneros">
+                  {(Array.isArray(genres) ? genres : []).map((g) => (
+                    <button
+                      key={g.id}
+                      type="button"
+                      className={`chip ${selectedGenre === g.id ? "is-selected" : ""}`}
+                      onClick={() => handleGenreClick(g.id)}
+                      aria-pressed={selectedGenre === g.id}
+                    >
+                      {g.name ?? g.title}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Barra de busca padrão (somente desktop) */}
-          {showSearchBar && (
+          {/* Busca desktop — só na Home */}
+          {isHome && (
             <div className="search-bar desktop-only">
               <input
                 type="text"
@@ -141,14 +145,17 @@ function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
             </div>
           )}
 
-          <Link className="favoritos" to={"/favoritos"}>
-            Meus Filmes
-          </Link>
+          {/* Link "Meus Filmes" NÃO aparece em /favoritos */}
+          {!isFavorites && (
+            <Link className="favoritos" to={"/favoritos"}>
+              Meus Filmes
+            </Link>
+          )}
         </nav>
       </div>
 
-      {/* Overlay fino de busca no mobile, fora do menu */}
-      {showSearchBar && (
+      {/* Overlay de busca mobile — só na Home */}
+      {isHome && (
         <div className={`search-overlay mobile-only ${isSearchOpen ? "open" : ""}`}>
           <div className="search-input-wrap">
             <FaSearch className="search-icon-left" />
@@ -158,7 +165,7 @@ function Header({ onSearch, onCategoryChange, onGenreChange, genres }) {
               placeholder="Pesquisar filmes..."
               value={searchTerm}
               onChange={handleSearch}
-              onBlur={() => setIsSearchOpen(false)} // fecha ao perder foco
+              onBlur={() => setIsSearchOpen(false)}
             />
           </div>
         </div>

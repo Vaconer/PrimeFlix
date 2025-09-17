@@ -19,7 +19,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
 }
 
 /* Estilo da logo */
@@ -100,9 +101,9 @@ header {
     font-size: 30px;
     cursor: pointer;
     color: rgb(227, 227, 227);
-    position: absolute;
-    top: 0;
-    right: 20px;
+    /* REMOVIDO: position absolute no topo */
+    position: static;
+    /* <- importante */
     padding: 8px;
     z-index: 1100;
 }
@@ -124,8 +125,8 @@ header {
     right: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.9);
-    padding: 10px;
-    gap: 10px;
+    padding: 29px;
+    gap: 20px;
 }
 
 /* Estilo do submenu de categorias */
@@ -190,8 +191,12 @@ header {
 
 @media (max-width: 768px) {
     .menu {
-        display: flex;
-        width: 75%;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        width: 90%;
+        padding: 0 12px;
+        gap: 8px;
     }
 
     .search-bar {
@@ -201,13 +206,21 @@ header {
         margin-top: 10px;
     }
 
+    .search-toggle {
+        display: inline-flex !important;
+        justify-self: center;
+        /* <- centraliza na coluna do meio */
+    }
+
     .search-bar input {
         width: 100%;
         /* Fazer a barra de pesquisa ocupar toda a largura disponível */
     }
 
     .menu-toggle {
-        display: block;
+        display: inline-flex;
+        position: static;
+        /* garante que participa do grid */
     }
 
     .nav-menu {
@@ -762,118 +775,122 @@ header {
 
 /* Lista de chips no mobile */
 .mobile-chip-list {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  width: 100%;
-  padding-right: 4px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    padding-right: 4px;
 }
 
 /* Chip base */
 .chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 38px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: #ECECEC;
-  font-size: 14px;
-  letter-spacing: .2px;
-  text-decoration: none;
-  transition: background-color 120ms ease, transform 80ms ease, border-color 120ms ease, box-shadow 120ms ease;
-  user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ECECEC;
+    font-size: 14px;
+    letter-spacing: .2px;
+    text-decoration: none;
+    transition: background-color 120ms ease, transform 80ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    user-select: none;
 }
 
 /* Toque/feedback */
 .chip:active {
-  transform: scale(0.98);
+    transform: scale(0.98);
 }
 
 /* Estado selecionado (fica “ligado” após o clique) */
 .chip.is-selected {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.42);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
-  font-weight: 600;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+    font-weight: 600;
 }
 
 /* Check sutil no chip selecionado */
 .chip.is-selected::after {
-  content: "✓";
-  margin-left: 8px;
-  font-size: 12px;
-  opacity: 0.9;
+    content: "✓";
+    margin-left: 8px;
+    font-size: 12px;
+    opacity: 0.9;
 }
 
 /* Acessibilidade */
 .chip:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.28), 0 0 0 5px rgba(0,0,0,0.35);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28), 0 0 0 5px rgba(0, 0, 0, 0.35);
 }
 
 /* Lista de chips (desktop e mobile) */
 .chip-list {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  width: 100%;
-  padding-right: 4px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    padding-right: 4px;
 }
 
 /* No desktop, pode ficar em grid bonitinho */
 @media (min-width: 769px) {
-  .chip-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 8px;
-  }
+    .chip-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 8px;
+    }
 }
 
 /* Chip base */
 .chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 38px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: #ECECEC;
-  font-size: 14px;
-  letter-spacing: .2px;
-  text-decoration: none;
-  transition: background-color 120ms ease, transform 80ms ease, border-color 120ms ease, box-shadow 120ms ease;
-  user-select: none;
-  cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ECECEC;
+    font-size: 14px;
+    letter-spacing: .2px;
+    text-decoration: none;
+    transition: background-color 120ms ease, transform 80ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    user-select: none;
+    cursor: pointer;
 }
 
-.chip:hover { background: rgba(255,255,255,0.10); }
+.chip:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
 
 /* Toque/feedback */
-.chip:active { transform: scale(0.98); }
+.chip:active {
+    transform: scale(0.98);
+}
 
 /* Estado selecionado */
 .chip.is-selected {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.42);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
-  font-weight: 600;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+    font-weight: 600;
 }
 
 /* Check sutil no chip selecionado */
 .chip.is-selected::after {
-  content: "✓";
-  margin-left: 8px;
-  font-size: 12px;
-  opacity: 0.9;
+    content: "✓";
+    margin-left: 8px;
+    font-size: 12px;
+    opacity: 0.9;
 }
 
 /* Acessibilidade */
 .chip:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.28), 0 0 0 5px rgba(0,0,0,0.35);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28), 0 0 0 5px rgba(0, 0, 0, 0.35);
 }
