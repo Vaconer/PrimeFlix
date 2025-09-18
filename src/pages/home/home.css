@@ -1003,6 +1003,7 @@ body {
 .poster-wrap img {
   transition: transform .28s ease, filter .28s ease;
   will-change: transform;
+  height: 300px;
 }
 
 .poster-wrap,
