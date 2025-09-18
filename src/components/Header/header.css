@@ -106,6 +106,16 @@ header {
     /* <- importante */
     padding: 8px;
     z-index: 1100;
+    background: transparent;
+    /* zera o “buttonface” */
+    border: 0;
+    /* remove borda nativa */
+    appearance: none;
+    -webkit-appearance: none;
+    /* iOS/Safari */
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
+    /* iOS highlight */
 }
 
 /* Estilo do menu de navegação (oculto em telas pequenas) */
