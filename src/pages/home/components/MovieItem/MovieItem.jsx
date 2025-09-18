@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MovieItem({ film }) {
   const [imgError, setImgError] = useState(false);
+  const navigate = useNavigate();
 
   const {
     id,
@@ -58,11 +59,13 @@ function MovieItem({ film }) {
   const captionId = `film-caption-${id}`;
   const titleId = `film-title-${id}`;
 
+  const goToDetails = () => navigate(`/filme/${id}`);
+
   return (
-    <article key={id} className="movie-card" aria-labelledby={titleId}>
+    <article className="movie-card" aria-labelledby={titleId}>
       <figure className="poster-wrap">
         {!imgError && preferredPath ? (
-          <picture>
+          <picture onClick={goToDetails} aria-label={`Ver detalhes do filme: ${title}`}>
             <source media="(min-width: 1024px)" srcSet={tmdb(preferredPath, 'w1280')} />
             <source media="(min-width: 640px)" srcSet={tmdb(preferredPath, 'w780')} />
             <img
@@ -76,7 +79,12 @@ function MovieItem({ film }) {
             />
           </picture>
         ) : (
-          <div className="poster-fallback" aria-hidden="true">
+          <div
+            className="poster-fallback"
+            aria-hidden="false"
+            onClick={goToDetails}
+            aria-label={`Ver detalhes do filme: ${title}`}
+          >
             {title}
           </div>
         )}

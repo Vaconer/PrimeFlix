@@ -457,6 +457,7 @@ body {
     color: #fff;
     font-family: 'Roboto', sans-serif;
     margin: auto;
+    margin-top: 10%;
 }
 
 .poster-section {
@@ -990,4 +991,52 @@ body {
     .slider-track {
         display: none;
     }
+}
+
+/* Hover individual — apenas o card sob o mouse anima */
+.lista-filmes .movie-card,
+.movie-card {
+  transition: transform .28s ease;
+  will-change: transform;
+}
+
+.poster-wrap img {
+  transition: transform .28s ease, filter .28s ease;
+  will-change: transform;
+}
+
+.poster-wrap,
+.poster-fallback { cursor: pointer; }
+
+/* efeito só no item hovered */
+.lista-filmes .movie-card,
+.movie-card {
+  transition: transform .28s ease, box-shadow .28s ease;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.lista-filmes .movie-card:hover,
+.movie-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  z-index: 2;              /* evita ser “cortado” por irmãos */
+  box-shadow: 0 12px 36px rgba(0,0,0,.45);
+}
+
+/* Se quiser que a imagem acompanhe mais um pouco o zoom */
+.movie-card:hover .poster-wrap img {
+  transition: transform .28s ease;
+}
+
+/* (opcional) garante que o container não corte o scale */
+.lista-filmes { overflow: visible; }
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .lista-filmes .movie-card,
+  .movie-card,
+  .movie-card .poster-wrap img {
+    transition: none;
+    transform: none;
+  }
 }

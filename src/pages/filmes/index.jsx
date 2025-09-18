@@ -91,6 +91,7 @@ function Filme() {
                 backgroundPosition: 'center',
                 position: 'relative',
                 color: '#fff',
+                height: '200%',
             }}
         >
             <div className="overlay" /> {/* Um overlay escuro para melhorar contraste */}
